@@ -34,7 +34,7 @@ class NoteContainer extends Component {
         <Search />
         <div className='container'>
           <Sidebar notes={this.state.notes} selectNote={this.selectNote} />
-          <Content note={this.state.selectedNote} />
+          <Content selectedNote={this.state.selectedNote} />
         </div>
       </Fragment>
     );
