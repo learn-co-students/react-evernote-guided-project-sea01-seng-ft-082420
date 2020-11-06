@@ -7,7 +7,8 @@ class NoteContainer extends Component {
 
   // set initial state
   state = {
-    notes: []
+    notes: [],
+    selectedNote: {}
   }
 
   // fetch data from backend
@@ -17,16 +18,23 @@ class NoteContainer extends Component {
     .then((data) => this.setState({notes: data}))
   }
 
-
+  selectNote = (noteId) => {
+    let selectNote = this.state.notes.filter((note) => note.id === noteId)
+    this.setState({ 
+      selectedNote: selectNote[0] //selectedNote becomes the note object selected
+    })
+    
+  }
 
   render() {
-    console.log(this.state.notes)
+    //console.log(this.state.notes)
+    console.log(this.state.selectedNote)
     return (
       <Fragment>
         <Search />
         <div className='container'>
-          <Sidebar notes={this.state.notes} />
-          <Content notes={this.state.notes} />
+          <Sidebar notes={this.state.notes} selectNote={this.selectNote} />
+          <Content note={this.state.selectedNote} />
         </div>
       </Fragment>
     );
