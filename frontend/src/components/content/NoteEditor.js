@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 
 class NoteEditor extends Component {
+
+
+  
   render() {
     return (
       <form className="note-editor">
