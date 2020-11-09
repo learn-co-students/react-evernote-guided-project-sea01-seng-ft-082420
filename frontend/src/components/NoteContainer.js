@@ -10,7 +10,7 @@ class NoteContainer extends Component {
     notes: [],
     selectedNote: {},
     selectedNoteId: null,
-    isEdited: false
+    editClicked: false
   }
 
   // fetch data from backend
@@ -20,24 +20,23 @@ class NoteContainer extends Component {
     .then((data) => this.setState({notes: data}))
   }
 
-  selectNote = (noteId) => {
+  displayNote = (noteId) => {
     let selectNote = this.state.notes.filter((note) => note.id === noteId)
     this.setState({ 
-      selectedNote: selectNote[0], //selectedNote becomes the note object selected
+      selectedNote: selectNote[0], //selectedNote becomes the note object to be displayed
       selectedNoteId: selectNote[0].id
     })
   }
 
   //creates a note in the backend. is displayed on the sidebar
   createNote = () => {
-    const noteExample = {
-      title: 'default',
-      body: 'placeholder',
-      user_id: 1
-    }
     fetch('http://localhost:3000/api/v1/notes', {
       method: 'POST',
-      body: JSON.stringify(noteExample),
+      body: JSON.stringify({
+        title: 'default default',
+        body: 'placeholder',
+        user_id: 1
+      }),
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json'
@@ -51,13 +50,19 @@ class NoteContainer extends Component {
     })
   }
 
+  findNote = () => {
+    return this.state.notes.find(note => note.id === this.state.selectedNoteId);
+  };
+
   editNote = (note) =>{
-    console.log('edit note button is clicked', note)
+    this.setState(prevState => ({
+      clicked: !prevState.editClicked
+    }))
   }
 
   // editNote = (note) => {
   //  const updateNote = {title: note.title, body: note.body}
-  //   fetch(`http://localhost:3000/api/v1/notes/${note.id}`), {
+  //   fetch(`http://localhost:3000/api/v1/notes/${this.state.selectedNoteId}`), {
   //     method: 'PATCH',
   //     body: JSON.stringify(updateNote),
   //     headers: {
@@ -66,8 +71,14 @@ class NoteContainer extends Component {
   //     }
   //   }
   //   .then(res => res.json())
-  //   .then(prevState => {
-      
+  //   .then(updateNote => {
+  //     const newNotes = [...this.state.notes]
+  //     const findEditedNote = this.state.notes.find(note.id === this.state.selectedNote)
+  //     const index = newNotes.indexOf(findEditedNote)
+  //     newNotes[index] = updateNote
+  //     this.setState({
+  //       notes: newNotes
+  //     })
   //   })
     
   // }
@@ -80,8 +91,8 @@ class NoteContainer extends Component {
       <Fragment>
         <Search />
         <div className='container'>
-          <Sidebar notes={this.state.notes} selectNote={this.selectNote} createNote={this.createNote}/>
-          <Content selectedNote={this.state.selectedNote} editNote={this.editNote}/>
+          <Sidebar notes={this.state.notes} displayNote={this.displayNote} createNote={this.createNote}/>
+          <Content selectedNote={this.state.selectedNote} editNote={this.editNote} editClicked={this.state.editClicked}/>
         </div>
       </Fragment>
     );

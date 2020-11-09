@@ -5,7 +5,7 @@ const NoteList = (props) => {
   return (
     <ul>
       {props.notes.map((note) => (
-            <NoteItem key={note.id} note={note} selectNote={props.selectNote}/>
+            <NoteItem key={note.id} note={note} displayNote={props.displayNote}/>
       ))}
     </ul>
   );
