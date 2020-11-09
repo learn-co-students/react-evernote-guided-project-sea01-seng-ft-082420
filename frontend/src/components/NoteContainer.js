@@ -9,7 +9,8 @@ class NoteContainer extends Component {
   state = {
     notes: [],
     selectedNote: {},
-    selectedNoteId: null
+    selectedNoteId: null,
+    isEdited: false
   }
 
   // fetch data from backend
@@ -27,6 +28,7 @@ class NoteContainer extends Component {
     })
   }
 
+  //creates a note in the backend. is displayed on the sidebar
   createNote = () => {
     const noteExample = {
       title: 'default',
@@ -72,7 +74,7 @@ class NoteContainer extends Component {
 
 
   render() {
-    console.log(this.state.notes)
+    //console.log(this.state.notes)
     //console.log(this.state.selectedNoteId)
     return (
       <Fragment>
