@@ -7,7 +7,6 @@ const NoteList = (props) => {
       {props.notes.map((note) => (
             <NoteItem key={note.id} note={note} selectNote={props.selectNote}/>
       ))}
-      {/* <NoteItem /> */}
     </ul>
   );
 }
