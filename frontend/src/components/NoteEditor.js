@@ -26,8 +26,9 @@ class NoteEditor extends Component {
 
   handleSubmit = e => {
     e.preventDefault()
-    console.log('i can submit stuff')
+    console.log('save has been clicked')
   }
+  
 
   render() {
     return (
@@ -35,7 +36,7 @@ class NoteEditor extends Component {
         <input value={this.props.selectedNote.title} type="text" name="title" onChange={(e) => this.editTitle(e)} />
         <textarea name="body" value={this.props.selectedNote.body} onChange={(e) => this.editBody(e)} />
         <div className="button-row">
-          <input className="button" type="submit" value="Save" />
+          <input className="button" type="submit" value="Save" onSubmit={(e) => this.handleSubmit(e)}/>
           <button type="button">Cancel</button>
         </div>
       </form>
