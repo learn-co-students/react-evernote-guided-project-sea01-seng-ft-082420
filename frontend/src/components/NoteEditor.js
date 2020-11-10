@@ -4,8 +4,8 @@ class NoteEditor extends Component {
   constructor(props){
     super(props)
     this.state={
-      title: '',
-      body: '',
+      title: this.props.selectedNote.title,
+      body: this.props.selectedNote.body,
       user_id: 1
     }
   }
@@ -24,7 +24,7 @@ class NoteEditor extends Component {
     })
   }
 
-  handleSubmit = e => {
+  handleSubmit = (e) => {
     e.preventDefault()
     console.log('save has been clicked')
   }
@@ -33,11 +33,11 @@ class NoteEditor extends Component {
   render() {
     return (
       <form className="note-editor" onSubmit={(e) => this.handleSubmit(e)}>
-        <input value={this.props.selectedNote.title} type="text" name="title" onChange={(e) => this.editTitle(e)} />
+        <input value={this.props.selectedNote.title} type="text" name="title"  onChange={(e) => this.editTitle(e)} />
         <textarea name="body" value={this.props.selectedNote.body} onChange={(e) => this.editBody(e)} />
         <div className="button-row">
           <input className="button" type="submit" value="Save" onSubmit={(e) => this.handleSubmit(e)}/>
-          <button type="button">Cancel</button>
+          <button type="button" onClick={() => this.props.cancelClicked()}>Cancel</button>
         </div>
       </form>
     );

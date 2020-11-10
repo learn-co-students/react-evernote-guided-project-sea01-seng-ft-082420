@@ -9,8 +9,8 @@ class NoteContainer extends Component {
   state = {
     notes: [],
     selectedNote: {},
-    selectedNoteId: null,
-    editClicked: false
+    editClicked: false,
+    searchInput: ""
   }
 
   // fetch data from backend
@@ -20,11 +20,19 @@ class NoteContainer extends Component {
     .then((data) => this.setState({notes: data}))
   }
 
+  filterNotes = () => {
+    return this.state.notes.filter( note => note.title.toLowerCase().includes(this.state.searchInput.toLowerCase()) )
+  }
+  handleSearch = (e) => {
+    this.setState({
+      searchInput: e.target.value
+    })
+  }
+
   displayNote = (noteId) => {
     let selectNote = this.state.notes.filter((note) => note.id === noteId)
     this.setState({ 
       selectedNote: selectNote[0], //selectedNote becomes the note object to be displayed
-      selectedNoteId: selectNote[0].id
     })
   }
 
@@ -51,7 +59,7 @@ class NoteContainer extends Component {
   }
 
   findNote = () => {
-    return this.state.notes.find(note => note.id === this.state.selectedNoteId);
+    return this.state.notes.find(note => note.id === this.state.selectedNote.id);
   };
 
   editNote = () =>{
@@ -83,9 +91,9 @@ class NoteContainer extends Component {
     //console.log(this.state.selectedNoteId)
     return (
       <Fragment>
-        <Search />
+        <Search handleSearch={this.handleSearch}/>
         <div className='container'>
-          <Sidebar notes={this.state.notes} displayNote={this.displayNote} createNote={this.createNote}/>
+          <Sidebar notes={this.filterNotes()} displayNote={this.displayNote} createNote={this.createNote}/>
           <Content selectedNote={this.state.selectedNote} editNote={this.editNote} editClicked={this.state.editClicked}/>
         </div>
       </Fragment>
