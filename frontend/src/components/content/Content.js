@@ -11,6 +11,19 @@ import Instructions from './Instructions';
           refactor to get this Content component to work.
 */
 class Content extends Component {
+  constructor(){
+    super()
+  
+    this.state = {
+    input: []
+    }
+  }
+
+  handleClick = (val) => {
+    console.log("clicked")
+    this.setState({input: val.note}),
+    console.log(val.note)
+  }
 
   renderContent = () => {
     if (false) {
@@ -23,10 +36,12 @@ class Content extends Component {
   }
 
   render() {
+    
     return (
       <div className='master-detail-element detail'>
         {/* {this.renderContent()} */}
-        <NoteViewer note={this.props}/>
+        <NoteEditor input={this.state.input} />
+        <NoteViewer note={this.props} handleClick={this.handleClick} />
       </div>
     );
   }
