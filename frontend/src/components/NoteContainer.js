@@ -54,9 +54,10 @@ class NoteContainer extends Component {
     return this.state.notes.find(note => note.id === this.state.selectedNoteId);
   };
 
-  editNote = (note) =>{
+  editNote = () =>{
+    console.log('edit button has been clicked')
     this.setState(prevState => ({
-      clicked: !prevState.editClicked
+      editClicked: !prevState.editClicked
     }))
   }
 
@@ -64,23 +65,16 @@ class NoteContainer extends Component {
   //  const updateNote = {title: note.title, body: note.body}
   //   fetch(`http://localhost:3000/api/v1/notes/${this.state.selectedNoteId}`), {
   //     method: 'PATCH',
-  //     body: JSON.stringify(updateNote),
+  //     body: JSON.stringify({
+  //      title: 'default default'
+  //      body: 'placeholder',
+  //      user_id: 1
+  //     }),
   //     headers: {
   //       'Content-Type': 'application/json',
   //       Accept: 'application/json'
   //     }
-  //   }
-  //   .then(res => res.json())
-  //   .then(updateNote => {
-  //     const newNotes = [...this.state.notes]
-  //     const findEditedNote = this.state.notes.find(note.id === this.state.selectedNote)
-  //     const index = newNotes.indexOf(findEditedNote)
-  //     newNotes[index] = updateNote
-  //     this.setState({
-  //       notes: newNotes
-  //     })
-  //   })
-    
+  //   }    
   // }
 
 

@@ -12,11 +12,11 @@ import Instructions from './Instructions';
 */
 class Content extends Component {
   renderContent = () => {
-    if (false) {
+    if (this.props.editClicked === true) {
       return <NoteEditor selectedNote={this.props.selectedNote} />;
-    } else if (this.props.selectedNote !== '') {
+    } else if (this.props.selectedNote.id !== undefined) {
       return < NoteViewer selectedNote={this.props.selectedNote} editNote={this.props.editNote} />;
-    } else {
+    } else if (this.props.editClicked === false) {
       return <Instructions />;
     }
   }
