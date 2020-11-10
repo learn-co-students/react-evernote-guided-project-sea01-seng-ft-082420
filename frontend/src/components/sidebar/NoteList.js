@@ -6,7 +6,7 @@ const NoteList = (props) => {
   return (
     <ul>
       {/* Render list of notes here... */}
-      {props.notes.map(note => <NoteItem title={note.title} body={note.body} />)}
+      {props.notes.map(note => <NoteItem title={note.title} body={note.body} onClick={props.click}/>)}
       
     </ul>
   );
