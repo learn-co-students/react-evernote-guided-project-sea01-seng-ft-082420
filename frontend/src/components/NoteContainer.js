@@ -50,7 +50,7 @@ class NoteContainer extends Component {
     }
     switch(this.state.sort){
       case "A-Z":
-        return [...filteredNotes].sort((a,b) => a.title > b.title ? 1 : -1)
+        return filteredNotes.sort((a,b) => a.title > b.title ? 1 : -1)
       case "Z-A":
           return filteredNotes.sort((a,b) => a.title < b.title ? 1 : -1)
       default:
@@ -62,7 +62,8 @@ class NoteContainer extends Component {
   displayNote = (noteId) => {
     let selectNote = this.state.notes.filter((note) => note.id === noteId)
     this.setState({ 
-      selectedNote: selectNote[0] //selectedNote becomes the note object to be displayed
+      selectedNote: selectNote[0], //selectedNote becomes the note object to be displayed
+      editClicked: false
     })
   }
 
@@ -96,12 +97,12 @@ class NoteContainer extends Component {
     })
   }
 
-  handleSaveClick = () => {
-    console.log('save button has been clicked')
-    this.setState({
-      editClicked: false
-    })
-  }
+  // handleSaveClick = () => {
+  //   console.log('save button has been clicked')
+  //   this.setState({
+  //     editClicked: false
+  //   })
+  // }
   
   handleCancelClick = () => {
     console.log('cancel button has been clicked')
@@ -110,6 +111,7 @@ class NoteContainer extends Component {
     })
   }
 
+  //updates the change of a note in whole notes array. called in noteEditor
   updateNotes = (updatedNote) => {
     let updatedNotes = this.state.notes.map( note => note.id === updatedNote.id ? updatedNote : note)
     this.setState({
@@ -128,7 +130,7 @@ class NoteContainer extends Component {
         <div className='container'>
           <Sidebar notes={this.filterNotes()} displayNote={this.displayNote} createNote={this.createNote}/>
           <Content selectedNote={this.state.selectedNote} editClicked={this.state.editClicked} updateNotes={this.updateNotes}
-            handleCancelClick={this.handleCancelClick} handleEditClick={this.handleEditClick} handleSaveClick={this.handleSaveClick}/>
+            handleCancelClick={this.handleCancelClick} handleEditClick={this.handleEditClick} />
         </div>
       </Fragment>
     );
