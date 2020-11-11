@@ -6,7 +6,7 @@ const NoteItem = (props) => (
     <p>{props.note.body.split(' ').splice(0, 7).join(' ') + ' ...'}</p> 
   </li>
 );
-// grabs the body makes it into an array for each word. grabs first 6 words and puts them into a string
+// grabs the body makes it into an array for each word. grabs first 7 words and puts them into a string
 
 export default NoteItem;
 

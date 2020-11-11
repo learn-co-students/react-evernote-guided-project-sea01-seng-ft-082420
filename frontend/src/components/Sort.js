@@ -2,10 +2,9 @@ import React from 'react';
 
 const Sort = (props) => {
   return (
-    <div>
-
-      <strong>Sort by:</strong>
-      <label>
+    <div style={{ display: 'flex'}}>
+      <strong>Sort By:</strong>
+      <label >
         <input type="radio" value='A-Z' name="sort" checked={props.sort === 'A-Z'} onChange={(e) => props.updateSort(e.target.value)}/>
         A-Z
       </label>
