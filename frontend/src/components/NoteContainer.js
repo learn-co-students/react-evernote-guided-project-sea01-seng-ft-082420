@@ -51,10 +51,7 @@ class NoteContainer extends Component {
       body: JSON.stringify({
         title: 'default',
         body: 'placeholder',
-        user: {
-          id: 1,
-          name: 'Chandler'
-        }
+        user_id: 3
       })
     })
     .then(res => res.json())
@@ -87,15 +84,23 @@ class NoteContainer extends Component {
     })
   }
 
+  updateNotes = (updatedNote) => {
+    let updatedNotes = this.state.notes.map( note => note.id === updatedNote.id ? updatedNote : note)
+    this.setState({
+      notes: updatedNotes
+    })
+  }
+
 
   render() {
+    console.log(this.state.notes)
     console.log(`handleClicked = ${this.state.editClicked}`)
     return (
       <Fragment>
         <Search handleSearch={this.handleSearch}/>
         <div className='container'>
           <Sidebar notes={this.filterNotes()} displayNote={this.displayNote} createNote={this.createNote}/>
-          <Content selectedNote={this.state.selectedNote} editClicked={this.state.editClicked} 
+          <Content selectedNote={this.state.selectedNote} editClicked={this.state.editClicked} updateNotes={this.updateNotes}
             handleCancelClick={this.handleCancelClick} handleEditClick={this.handleEditClick} handleSaveClick={this.handleSaveClick}/>
         </div>
       </Fragment>

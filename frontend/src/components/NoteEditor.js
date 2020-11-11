@@ -34,7 +34,7 @@ class NoteEditor extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-    fetch(`http://localhost:3000/api/v1/notes/${this.props.selectedNote.id}`, {
+    return fetch(`http://localhost:3000/api/v1/notes/${this.props.selectedNote.id}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
@@ -43,10 +43,10 @@ class NoteEditor extends Component {
       body: JSON.stringify(this.state.note)
     })
     .then(res => res.json())
-    .then(note => {
-      console.log(note)
-      this.props.handleSaveClick()
-    })
+    .then(updatedNote => {
+      console.log(updatedNote)
+      this.props.updateNotes(updatedNote)
+    }).finally(this.props.handleSaveClick())
   }
   
 
