@@ -55,6 +55,12 @@ class NoteContainer extends Component {
     } else if (this.state.sort === "Z-A") {
         console.log('sort by Z-A')
         return filteredNotes.sort((a,b) => a.title < b.title ? 1 : -1)
+    } else if (this.state.sort === "Longest-Shortest") {
+      console.log('sort by Longest-Shortest')
+      return filteredNotes.sort((a,b) => a.body.length < b.body.length ? 1 : -1)
+    } else if (this.state.sort === "Shortest-Longest") {
+      console.log('sort by Shortest-Longest')
+      return filteredNotes.sort((a,b) => a.body.length > b.body.length ? 1 : -1)
     // } else if (this.state.sort === "Newest-Oldest") {
     //   console.log('sort by Newest-Oldest')
     //   return filteredNotes.sort((a,b) => a.updated_at < b.updated_at ? 1 : -1)
