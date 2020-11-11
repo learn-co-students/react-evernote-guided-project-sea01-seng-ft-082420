@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import Search from './Search';
 import Sidebar from './Sidebar';
 import Content from './Content';
+import Sort from './Sort';
 
 class NoteContainer extends Component {
 
@@ -10,7 +11,8 @@ class NoteContainer extends Component {
     notes: [],
     selectedNote: {},
     editClicked: false,
-    searchInput: ""
+    searchInput: "",
+    sort: 'None'
   }
 
   // fetch data from backend
@@ -28,8 +30,32 @@ class NoteContainer extends Component {
   }
 
   //filters notes based on what is typed in the search bar
+  // filterNotes = () => {
+  //   return this.state.notes.filter( note => note.title.toLowerCase().includes(this.state.searchInput.toLowerCase()) )
+  // }
+
+  //updates the sort based on the sort pressed
+  updateSort = (sortBy) => {
+    this.setState({
+      sort: sortBy
+    })
+  }
+
+  //filters notes based on what is typed in the search bar and what is based on sort by
   filterNotes = () => {
-    return this.state.notes.filter( note => note.title.toLowerCase().includes(this.state.searchInput.toLowerCase()) )
+    let filteredNotes = [...this.state.notes]
+    if(this.state.filter !== ""){
+      filteredNotes =  filteredNotes.filter( note => note.title.toLowerCase().includes(this.state.searchInput.toLowerCase()) ) 
+      return filteredNotes     
+    }
+    switch(this.state.sort){
+      case "A-Z":
+        return [...filteredNotes].sort((a,b) => a.title > b.title ? 1 : -1)
+      case "Z-A":
+          return filteredNotes.sort((a,b) => a.title < b.title ? 1 : -1)
+      default:
+        return filteredNotes
+    }
   }
 
   //displays note clicked on content
@@ -98,6 +124,7 @@ class NoteContainer extends Component {
     return (
       <Fragment>
         <Search handleSearch={this.handleSearch}/>
+        <Sort sort={this.state.sort} updateSort={this.updateSort}/>
         <div className='container'>
           <Sidebar notes={this.filterNotes()} displayNote={this.displayNote} createNote={this.createNote}/>
           <Content selectedNote={this.state.selectedNote} editClicked={this.state.editClicked} updateNotes={this.updateNotes}
