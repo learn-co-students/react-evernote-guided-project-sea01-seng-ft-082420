@@ -20,19 +20,23 @@ class NoteContainer extends Component {
     .then((data) => this.setState({notes: data}))
   }
 
-  filterNotes = () => {
-    return this.state.notes.filter( note => note.title.toLowerCase().includes(this.state.searchInput.toLowerCase()) )
-  }
+  // sets searchInput to whatever is typed in the search bar to
   handleSearch = (e) => {
     this.setState({
       searchInput: e.target.value
     })
   }
 
+  //filters notes based on what is typed in the search bar
+  filterNotes = () => {
+    return this.state.notes.filter( note => note.title.toLowerCase().includes(this.state.searchInput.toLowerCase()) )
+  }
+
+  //displays note clicked on content
   displayNote = (noteId) => {
     let selectNote = this.state.notes.filter((note) => note.id === noteId)
     this.setState({ 
-      selectedNote: selectNote[0], //selectedNote becomes the note object to be displayed
+      selectedNote: selectNote[0] //selectedNote becomes the note object to be displayed
     })
   }
 
@@ -40,15 +44,15 @@ class NoteContainer extends Component {
   createNote = () => {
     fetch('http://localhost:3000/api/v1/notes', {
       method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json'
+      },
       body: JSON.stringify({
         title: 'default default',
         body: 'placeholder',
         user_id: 1
-      }),
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json'
-      }
+      })
     })
     .then(res => res.json())
     .then(newNote => {
@@ -58,43 +62,45 @@ class NoteContainer extends Component {
     })
   }
 
-  findNote = () => {
-    return this.state.notes.find(note => note.id === this.state.selectedNote.id);
-  };
 
-  editNote = () =>{
+  handleEditClick = () => {
     console.log('edit button has been clicked')
-    this.setState(prevState => ({
-      editClicked: !prevState.editClicked
-    }))
+    this.setState({
+      editClicked: true
+    })
   }
 
-  // editNote = (note) => {
-  //  const updateNote = {title: note.title, body: note.body}
-  //   fetch(`http://localhost:3000/api/v1/notes/${this.state.selectedNoteId}`), {
-  //     method: 'PATCH',
-  //     body: JSON.stringify({
-  //      title: 'default default'
-  //      body: 'placeholder',
-  //      user_id: 1
-  //     }),
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       Accept: 'application/json'
-  //     }
-  //   }    
-  // }
+  
+  handleCancelClick = () => {
+    console.log('cancel button has been clicked')
+    this.setState({
+      editClicked: false
+    })
+  }
 
+  // moving this logic to note editor
+  handleSaveClick = () => {
+    console.log('save button is clicked')
+    // fetch(`http://localhost:3000/api/v1/notes/${this.state.selectedNote.id}`), {
+    //   method: 'PATCH',
+    //   body: JSON.stringify(this.selectedNote),
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //     Accept: 'application/json'
+    //   }
+    // }  
+  }
 
   render() {
     //console.log(this.state.notes)
-    //console.log(this.state.selectedNoteId)
+    console.log(`handleClicked = ${this.state.editClicked}`)
     return (
       <Fragment>
         <Search handleSearch={this.handleSearch}/>
         <div className='container'>
           <Sidebar notes={this.filterNotes()} displayNote={this.displayNote} createNote={this.createNote}/>
-          <Content selectedNote={this.state.selectedNote} editNote={this.editNote} editClicked={this.state.editClicked}/>
+          <Content selectedNote={this.state.selectedNote} editClicked={this.state.editClicked} handleSaveClick={this.handleSaveClick} 
+            handleCancelClick={this.handleCancelClick} handleEditClick={this.handleEditClick}/>
         </div>
       </Fragment>
     );

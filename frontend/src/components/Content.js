@@ -11,31 +11,12 @@ import Instructions from './Instructions';
           refactor to get this Content component to work.
 */
 class Content extends Component {
-  constructor(props){
-    super(props)
-
-    this.state={
-      editClicked: this.props.editClicked
-    }
-  }
-
-  handleCancelClick = () => {
-    console.log('cancel has been clicked')
-    this.setState({
-      editClicked: false
-    })
-  }
-
-
-
-
-
-
   renderContent = () => {
     if (this.props.editClicked === true) {
-      return <NoteEditor selectedNote={this.props.selectedNote} handleCancelClick={this.handleCancelClick}/>;
+      return <NoteEditor selectedNote={this.props.selectedNote} handleCancelClick={this.props.handleCancelClick} 
+        handleSaveClick={this.props.handleSaveClick}/>;
     } else if (this.props.selectedNote.id !== undefined) {
-      return < NoteViewer selectedNote={this.props.selectedNote} editNote={this.props.editNote} />;
+      return < NoteViewer selectedNote={this.props.selectedNote} handleEditClick={this.props.handleEditClick} />;
     } else if (this.props.editClicked === false) {
       return <Instructions />;
     }
