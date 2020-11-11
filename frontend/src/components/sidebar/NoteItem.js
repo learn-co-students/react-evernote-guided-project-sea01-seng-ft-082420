@@ -1,9 +1,9 @@
 import React from 'react';
 import TextTruncate from 'react-text-truncate'
-import Content from '../content/Content.js'
 
-
-const NoteItem = (props) => (
+const NoteItem = (props) => {
+  console.log
+  return (
 
   <li>
     <h2>{props.title}</h2>
@@ -13,12 +13,13 @@ const NoteItem = (props) => (
     element="span"
     truncateText="..." 
     text={props.body}
-    textTruncateChild={<a href="#" onClick={() => props.onClick(props)}>Read More</a>}
+    
+    // textTruncateChild={<button onClick={() => props.onClick(props)}>Read More</button>}
     />
-  
+   <button onClick={() => props.onClick(props)}>Read More</button>
   </li>
 
 
 );
-
+  }
 export default NoteItem;

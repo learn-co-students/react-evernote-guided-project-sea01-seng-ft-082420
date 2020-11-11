@@ -2,12 +2,29 @@ import React, { Component } from 'react';
 
 class NoteEditor extends Component {
   
+  constructor(props){
+    super(props)
+    this.state = {
+      input: []
+    }
+  }
+
+  handleChange = (e) => {
+    this.setState({...this.state, [e.target.name]: e.target.value})
+  }
+
+  handleSubmit = (e) => {
+    e.preventDefault()
+    this.props.save(this.state, this.props.input.id)
+  }
+  
   
   render() {
+    console.log(this.props)
     return (
-      <form className="note-editor">
-        <input type="text" name="title" placeholder={this.props.input.title} />
-        <textarea name="body" placeholder={this.props.input.body} />
+      <form className="note-editor" onSubmit={this.handleSubmit} >
+        <input type="text" name="title" placeholder={this.props.input.title} onChange={this.handleChange} />
+        <textarea name="body" placeholder={this.props.input.body} onChange={this.handleChange} />
         <div className="button-row">
           <input className="button" type="submit" value="Save" />
           <button type="button">Cancel</button>

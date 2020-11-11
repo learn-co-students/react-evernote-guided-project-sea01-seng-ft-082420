@@ -21,7 +21,7 @@ class Content extends Component {
 
   handleClick = (val) => {
     console.log("clicked")
-    this.setState({input: val.note}),
+    this.setState({input: val.note})
     console.log(val.note)
   }
 
@@ -40,7 +40,7 @@ class Content extends Component {
     return (
       <div className='master-detail-element detail'>
         {/* {this.renderContent()} */}
-        <NoteEditor input={this.state.input} />
+        <NoteEditor input={this.state.input} save={this.props.save} />
         <NoteViewer note={this.props} handleClick={this.handleClick} />
       </div>
     );
