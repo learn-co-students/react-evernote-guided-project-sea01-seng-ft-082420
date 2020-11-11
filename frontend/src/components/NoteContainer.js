@@ -44,7 +44,6 @@ class NoteContainer extends Component {
   //filters notes based on what is typed in the search bar and what is based on sort by
   filterNotes = () => {
     let filteredNotes = [...this.state.notes]
-    console.log(filteredNotes)
     if(this.state.searchInput !== ''){
       filteredNotes =  filteredNotes.filter( note => note.title.toLowerCase().includes(this.state.searchInput.toLowerCase()) ) 
       return filteredNotes     
@@ -104,6 +103,15 @@ class NoteContainer extends Component {
     })
   }
 
+  //updates the change of a note in whole notes array when new note created. called in noteEditor
+  updateNotes = (updatedNote) => {
+    let updatedNotes = this.state.notes.map( note => note.id === updatedNote.id ? updatedNote : note)
+    this.setState({
+      notes: updatedNotes,
+      editClicked: false,
+      selectedNote: {}
+    })
+  }
 
   handleEditClick = () => {
     console.log('edit button has been clicked')
@@ -126,17 +134,29 @@ class NoteContainer extends Component {
     })
   }
 
-  //updates the change of a note in whole notes array. called in noteEditor
-  updateNotes = (updatedNote) => {
-    let updatedNotes = this.state.notes.map( note => note.id === updatedNote.id ? updatedNote : note)
-    this.setState({
-      notes: updatedNotes
+  handleDeleteClick = () => {
+    console.log('delete button has been clicked')
+    fetch(`http://localhost:3000/api/v1/notes/${this.state.selectedNote.id}`, {
+      method: "DELETE"
     })
+      .then(res => res.json())
+      .then(() => {
+        const filteredNotes = [...this.state.notes].filter(
+          note => note.id !== this.state.selectedNote.id
+        )
+        this.setState({
+          notes: filteredNotes,
+          editClicked: false,
+          // makes it go back to directions screen
+          selectedNote: {}
+        })
+      })
   }
 
 
   render() {
     //console.log(`handleClicked = ${this.state.editClicked}`)
+    console.log(this.state.notes)
     return (
       <Fragment>
         <Search handleSearch={this.handleSearch}/>
@@ -144,7 +164,8 @@ class NoteContainer extends Component {
         <div className='container'>
           <Sidebar notes={this.filterNotes()} displayNote={this.displayNote} createNote={this.createNote}/>
           <Content selectedNote={this.state.selectedNote} editClicked={this.state.editClicked} updateNotes={this.updateNotes}
-            handleCancelClick={this.handleCancelClick} handleEditClick={this.handleEditClick} />
+            handleCancelClick={this.handleCancelClick} handleEditClick={this.handleEditClick} 
+            handleDeleteClick={this.handleDeleteClick}/>
         </div>
       </Fragment>
     );

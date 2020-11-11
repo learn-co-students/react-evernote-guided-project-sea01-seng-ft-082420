@@ -11,7 +11,7 @@ class Content extends Component {
         editClicked={this.props.editClicked} updateNotes={this.props.updateNotes}/>;
     } else if (this.props.selectedNote.id !== undefined) {
       return < NoteViewer selectedNote={this.props.selectedNote} handleEditClick={this.props.handleEditClick} 
-        editClicked={this.props.editClicked}/>;
+        editClicked={this.props.editClicked} handleDeleteClick={this.props.handleDeleteClick}/>;
     } else if (this.props.editClicked === false) {
       return <Instructions />;
     }
