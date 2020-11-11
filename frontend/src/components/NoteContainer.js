@@ -44,26 +44,35 @@ class NoteContainer extends Component {
   //filters notes based on what is typed in the search bar and what is based on sort by
   filterNotes = () => {
     let filteredNotes = [...this.state.notes]
-    if(this.state.filter !== ""){
+    console.log(filteredNotes)
+    if(this.state.searchInput !== ''){
       filteredNotes =  filteredNotes.filter( note => note.title.toLowerCase().includes(this.state.searchInput.toLowerCase()) ) 
       return filteredNotes     
     }
-    switch(this.state.sort){
-      case "A-Z":
+    if (this.state.sort === "A-Z") {
+        console.log('sort by A-Z')
         return filteredNotes.sort((a,b) => a.title > b.title ? 1 : -1)
-      case "Z-A":
-          return filteredNotes.sort((a,b) => a.title < b.title ? 1 : -1)
-      default:
+    } else if (this.state.sort === "Z-A") {
+        console.log('sort by Z-A')
+        return filteredNotes.sort((a,b) => a.title < b.title ? 1 : -1)
+    // } else if (this.state.sort === "Newest-Oldest") {
+    //   console.log('sort by Newest-Oldest')
+    //   return filteredNotes.sort((a,b) => a.updated_at < b.updated_at ? 1 : -1)
+    // } else if (this.state.sort === "Oldest-Newest") {
+    //   console.log('sort by Oldest-Newest')
+    //   return filteredNotes.sort((a,b) => a.updated_at > b.updated_at ? 1 : -1)
+    } else {
         return filteredNotes
     }
   }
+  
 
   //displays note clicked on content
   displayNote = (noteId) => {
     let selectNote = this.state.notes.filter((note) => note.id === noteId)
     this.setState({ 
       selectedNote: selectNote[0], //selectedNote becomes the note object to be displayed
-      editClicked: false
+      editClicked: false // gives the ability to click on other notes while in edit mode
     })
   }
 
@@ -78,7 +87,7 @@ class NoteContainer extends Component {
       body: JSON.stringify({
         title: 'default',
         body: 'placeholder',
-        user_id: 3
+        user_id: 5
       })
     })
     .then(res => res.json())
@@ -121,8 +130,7 @@ class NoteContainer extends Component {
 
 
   render() {
-    console.log(this.state.notes)
-    console.log(`handleClicked = ${this.state.editClicked}`)
+    //console.log(`handleClicked = ${this.state.editClicked}`)
     return (
       <Fragment>
         <Search handleSearch={this.handleSearch}/>
