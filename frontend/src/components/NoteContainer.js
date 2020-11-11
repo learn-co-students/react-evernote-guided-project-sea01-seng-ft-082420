@@ -49,9 +49,12 @@ class NoteContainer extends Component {
         Accept: 'application/json'
       },
       body: JSON.stringify({
-        title: 'default default',
+        title: 'default',
         body: 'placeholder',
-        user_id: 1
+        user: {
+          id: 1,
+          name: 'Chandler'
+        }
       })
     })
     .then(res => res.json())
@@ -70,6 +73,12 @@ class NoteContainer extends Component {
     })
   }
 
+  handleSaveClick = () => {
+    console.log('save button has been clicked')
+    this.setState({
+      editClicked: false
+    })
+  }
   
   handleCancelClick = () => {
     console.log('cancel button has been clicked')
@@ -78,29 +87,16 @@ class NoteContainer extends Component {
     })
   }
 
-  // moving this logic to note editor
-  handleSaveClick = () => {
-    console.log('save button is clicked')
-    // fetch(`http://localhost:3000/api/v1/notes/${this.state.selectedNote.id}`), {
-    //   method: 'PATCH',
-    //   body: JSON.stringify(this.selectedNote),
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //     Accept: 'application/json'
-    //   }
-    // }  
-  }
 
   render() {
-    //console.log(this.state.notes)
     console.log(`handleClicked = ${this.state.editClicked}`)
     return (
       <Fragment>
         <Search handleSearch={this.handleSearch}/>
         <div className='container'>
           <Sidebar notes={this.filterNotes()} displayNote={this.displayNote} createNote={this.createNote}/>
-          <Content selectedNote={this.state.selectedNote} editClicked={this.state.editClicked} handleSaveClick={this.handleSaveClick} 
-            handleCancelClick={this.handleCancelClick} handleEditClick={this.handleEditClick}/>
+          <Content selectedNote={this.state.selectedNote} editClicked={this.state.editClicked} 
+            handleCancelClick={this.handleCancelClick} handleEditClick={this.handleEditClick} handleSaveClick={this.handleSaveClick}/>
         </div>
       </Fragment>
     );

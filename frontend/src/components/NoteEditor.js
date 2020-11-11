@@ -7,32 +7,33 @@ class NoteEditor extends Component {
       note: {
         title: this.props.selectedNote.title,
         body: this.props.selectedNote.body
-      },
-      editClicked: true
+      }
     }
   }
 
   editTitle = (e) => {
-    console.log(e.target.value)
-    this.setState({
+    let changes = e.target.value
+    this.setState(prevState => ({
       note: {
-        title: e.target.value
+        ...prevState.note,
+        title: changes
       }
-    })
+    }))
   }
+  //[e.target.name]: e.target.value
 
   editBody = (e) => {
-    console.log(e.target.value)
-    this.setState({
+    let changes = e.target.value
+    this.setState(prevState => ({
       note: {
-        body: e.target.value
+        ...prevState.note,
+        body: changes
       }
-    })
+    }))
   }
 
   handleSubmit = (e) => {
     e.preventDefault()
-    console.log('save has been clicked')
     fetch(`http://localhost:3000/api/v1/notes/${this.props.selectedNote.id}`, {
       method: 'PATCH',
       headers: {
@@ -44,7 +45,7 @@ class NoteEditor extends Component {
     .then(res => res.json())
     .then(note => {
       console.log(note)
-      this.setState({editClicked: false})
+      this.props.handleSaveClick()
     })
   }
   
@@ -55,7 +56,7 @@ class NoteEditor extends Component {
         <input defaultValue={this.state.note.title} type="text" name="title"  onChange={(e) => this.editTitle(e)} />
         <textarea name="body" defaultValue={this.state.note.body} onChange={(e) => this.editBody(e)} />
         <div className="button-row">
-          <input className="button" type="submit" value="Save"/>
+          <input className="button" type="submit" value="Save" onSubmit={(e) => this.handleSubmit(e)}/>
           <button type="button" onClick={() => this.props.handleCancelClick()}>Cancel</button>
         </div>
       </form>
