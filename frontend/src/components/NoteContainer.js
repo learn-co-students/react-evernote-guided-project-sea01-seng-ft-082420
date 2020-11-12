@@ -9,7 +9,8 @@ class NoteContainer extends Component {constructor() {
   this.state = {
     notes: [ ],
     renderNote: [],
-    renderViewer: false
+    renderViewer: false,
+    toggleEditor: true
   }
 }
 
@@ -20,10 +21,8 @@ componentDidMount() {
 }
 
 updateNote = (state, id) => {
-  
   // console.log("hit the update");
   // console.log(state, id)
-
   fetch(`http://localhost:3000/api/v1/notes/${id}`, {
     method: "PATCH",
     headers: {
@@ -35,7 +34,6 @@ updateNote = (state, id) => {
       body: state.body
     })
   })
-  
     .then(resp => resp.json())
     .then(data => {
       this.setState(prevState => ({
@@ -44,10 +42,6 @@ updateNote = (state, id) => {
       )
     })
   }
-
-clickRender = (val) => {
-  this.setState({renderNote: val, renderViewer: true})
-}
 
 handleNewClick = () => {
   fetch('http://localhost:3000/api/v1/notes', {
@@ -69,8 +63,16 @@ handleNewClick = () => {
   })
 }
 
+clickRender = (val) => {
+  this.setState({renderNote: val, renderViewer: true, toggleEditor: false})
+}
+
+toggleEditor = () => {
+  this.setState({toggleEditor: true})
+}
+
   render() {
-    // console.log(this.state.renderNote)
+    console.log(this.state.renderNote)
     return (
       <Fragment>
         <Search />
@@ -85,6 +87,8 @@ handleNewClick = () => {
             click={this.clickRender} 
             save={this.updateNote}  
             view={this.state.renderViewer}
+            toggle={this.state.toggleEditor}
+            toggleEditor={this.toggleEditor}
           />
         </div>
       </Fragment>
