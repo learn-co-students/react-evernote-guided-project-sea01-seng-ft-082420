@@ -8,7 +8,8 @@ class NoteContainer extends Component {constructor() {
 
   this.state = {
     notes: [ ],
-    renderNote: []
+    renderNote: [],
+    renderViewer: false
   }
 }
 
@@ -45,7 +46,7 @@ updateNote = (state, id) => {
   }
 
 clickRender = (val) => {
-  this.setState({renderNote: val})
+  this.setState({renderNote: val, renderViewer: true})
 }
 
 handleNewClick = () => {
@@ -69,13 +70,22 @@ handleNewClick = () => {
 }
 
   render() {
-    console.log(this.state.renderNote)
+    // console.log(this.state.renderNote)
     return (
       <Fragment>
         <Search />
         <div className='container'>
-          <Sidebar notes={this.state.notes} click={() => this.clickRender} handleNewClick={this.handleNewClick}/>
-          <Content note={this.state.renderNote} save={this.updateNote} />
+          <Sidebar 
+            notes={this.state.notes} 
+            click={() => this.clickRender} 
+            handleNewClick={this.handleNewClick}
+          />
+          <Content 
+            note={this.state.renderNote}
+            click={this.clickRender} 
+            save={this.updateNote}  
+            view={this.state.renderViewer}
+          />
         </div>
       </Fragment>
     );

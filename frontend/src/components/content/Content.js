@@ -15,32 +15,49 @@ class Content extends Component {
     super()
   
     this.state = {
-    input: []
+    input: [],
+    renderEditor: false
     }
   }
 
   handleClick = (val) => {
-    this.setState({input: val.note})
-    console.log(val.note)
+    this.setState({input: val, renderEditor: true})
+    console.log(val)
   }
 
-  renderContent = () => {
-    if (false) {
-      return <NoteEditor />;
-    } else if (false) {
-      return <NoteViewer />;
-    } else {
-      return <Instructions />;
-    }
+  toggleEditor = () => {
+    this.setState({renderEditor: false})
   }
+
+  // renderContent = () => {
+  //   if (false) {
+  //     return <NoteEditor />;
+  //   } else if (false) {
+  //     return <NoteViewer />;
+  //   } else {
+  //     return <Instructions />;
+  //   }
+  // }
+
+  renderContent = () => {
+      if (this.state.renderEditor) {
+        return <NoteEditor input={this.state.input} click={this.props.click} save={this.props.save} toggle={this.toggleEditor}/>;
+      } else if (this.props.view) {
+        return <NoteViewer note={this.props.note} handleClick={this.handleClick}/>;
+      } else {
+        return <Instructions />;
+      }
+    }
 
   render() {
     console.log(this.state.input)
+    console.log(this.state.renderEditor)
+    console.log(this.props.view)
     return (
       <div className='master-detail-element detail'>
-        {/* {this.renderContent()} */}
-        <NoteEditor input={this.state.input} save={this.props.save} />
-        <NoteViewer note={this.props} handleClick={this.handleClick} />
+        {this.renderContent()}
+        {/* <NoteEditor input={this.state.input} save={this.props.save} />
+        <NoteViewer note={this.props} handleClick={this.handleClick} /> */}
       </div>
     );
   }

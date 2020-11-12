@@ -24,7 +24,9 @@ class NoteEditor extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-    this.props.save(this.state, this.props.input.id)
+    this.props.save(this.state, this.props.input.id),
+    this.props.toggle(),
+    this.props.click(this.state)
   }
 
   render() {
