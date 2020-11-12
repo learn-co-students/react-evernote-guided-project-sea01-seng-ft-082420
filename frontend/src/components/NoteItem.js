@@ -1,10 +1,21 @@
 import React from 'react';
 
-const NoteItem = (props) => (
-  <li>
-    <h2>Title</h2>
-    <p>Caption...</p>
-  </li>
-);
+const NoteItem = (props) => {
+  if(props.note){
+    let body = props.note.body;
+    if (body.length > 30)
+    {
+      body = `${props.note.body.substring(0, 27)}...`
+    }
+    return (  
+      <li onClick={() => props.handleSelect(props.note)}>
+        <h2>{props.note.title}</h2>
+        <p>{body}</p>
+        {/* <button type="button">Edit</button> */}
+      </li>)
+  }
+
+  return null
+};
 
 export default NoteItem;

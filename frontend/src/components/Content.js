@@ -11,11 +11,22 @@ import Instructions from './Instructions';
           refactor to get this Content component to work.
 */
 class Content extends Component {
+  constructor() {
+    super()
+    this.state = {
+      edit: false
+    }
+  }
+
+  onEditClick = () => {
+    this.setState({edit: !this.state.edit});
+  }
+
   renderContent = () => {
-    if (false) {
-      return <NoteEditor />;
-    } else if (false) {
-      return <NoteViewer />;
+    if (this.props.note && this.state.edit) {
+      return <NoteEditor note={this.props.note} onCancel={this.onEditClick}/>;
+    } else if (this.props.note && !this.state.edit){
+      return <NoteViewer note={this.props.note} onEdit={this.onEditClick}/>;
     } else {
       return <Instructions />;
     }

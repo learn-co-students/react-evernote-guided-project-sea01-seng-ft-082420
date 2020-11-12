@@ -178,8 +178,9 @@ button, input[type="submit"] {
 }
 
 button:hover, .nav-bar:hover, input[type="submit"]:hover {
-  background-image: linear-gradient(to right top, #8A2387, #E94057, #F27121);
+  background-image: linear-gradient(to right top, #ecd713, #7ee940, #effd2e);
   background-repeat: no-repeat;
+  color: black;
 }
 
 button:focus, input[type="submit"]:focus {
