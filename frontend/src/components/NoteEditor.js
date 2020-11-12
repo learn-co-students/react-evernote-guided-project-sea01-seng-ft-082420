@@ -20,7 +20,7 @@ class NoteEditor extends Component {
       }
     }))
   }
-  //[e.target.name]: e.target.value
+
 
   editBody = (e) => {
     let changes = e.target.value
@@ -31,6 +31,12 @@ class NoteEditor extends Component {
       }
     }))
   }
+
+  // editNote = e => {
+  //   this.setState({
+  //     [e.target.name]: e.target.value
+  //   });
+  // };
 
   handleSubmit = (e) => {
     e.preventDefault()

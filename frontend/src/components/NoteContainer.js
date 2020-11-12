@@ -50,10 +50,10 @@ class NoteContainer extends Component {
     }
     if (this.state.sort === "A-Z") {
         console.log('sort by A-Z')
-        return filteredNotes.sort((a,b) => a.title > b.title ? 1 : -1)
+        return filteredNotes.sort((a,b) => a.title.toLowerCase() > b.title.toLowerCase() ? 1 : -1)
     } else if (this.state.sort === "Z-A") {
         console.log('sort by Z-A')
-        return filteredNotes.sort((a,b) => a.title < b.title ? 1 : -1)
+        return filteredNotes.sort((a,b) => a.title.toLowerCase() < b.title.toLowerCase() ? 1 : -1)
     } else if (this.state.sort === "Longest-Shortest") {
       console.log('sort by Longest-Shortest')
       return filteredNotes.sort((a,b) => a.body.length < b.body.length ? 1 : -1)
@@ -90,8 +90,8 @@ class NoteContainer extends Component {
         Accept: 'application/json'
       },
       body: JSON.stringify({
-        title: 'default',
-        body: 'placeholder',
+        title: 'Default',
+        body: 'Placeholder',
         user_id: 5
       })
     })
