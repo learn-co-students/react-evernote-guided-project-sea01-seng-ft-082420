@@ -2,7 +2,7 @@ import React from 'react';
 import TextTruncate from 'react-text-truncate'
 
 const NoteItem = (props) => {
-  console.log
+  // console.log(props)
   return (
 
   <li>

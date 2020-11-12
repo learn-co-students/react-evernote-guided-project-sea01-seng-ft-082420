@@ -3,11 +3,20 @@ import React, { Component } from 'react';
 class NoteEditor extends Component {
   
   constructor(props){
+    console.log(props)
     super(props)
     this.state = {
-      input: []
+      input: [ ]
     }
   }
+
+  // state = {
+  //   input: this.props.input
+  // }
+
+  // componentDidMount(){
+  //   this.setState({input: this.props.input})
+  // }
 
   handleChange = (e) => {
     this.setState({...this.state, [e.target.name]: e.target.value})
@@ -17,10 +26,11 @@ class NoteEditor extends Component {
     e.preventDefault()
     this.props.save(this.state, this.props.input.id)
   }
-  
-  
+
   render() {
-    console.log(this.props)
+    console.log(this.props.input)
+    console.log(this.state)
+    
     return (
       <form className="note-editor" onSubmit={this.handleSubmit} >
         <input type="text" name="title" placeholder={this.props.input.title} onChange={this.handleChange} />

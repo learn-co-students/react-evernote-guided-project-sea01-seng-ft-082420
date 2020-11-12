@@ -9,7 +9,7 @@ class Sidebar extends Component {
     return (
       <div className='master-detail-element sidebar'>
         <NoteList notes={this.props.notes} click={this.props.click()}/>
-        <button>New</button>
+        <button onClick={this.props.handleNewClick}>New</button>
       </div>
     );
   }

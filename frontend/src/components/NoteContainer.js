@@ -20,8 +20,8 @@ componentDidMount() {
 
 updateNote = (state, id) => {
   
-  console.log("hit the update");
-  console.log(state, id)
+  // console.log("hit the update");
+  // console.log(state, id)
 
   fetch(`http://localhost:3000/api/v1/notes/${id}`, {
     method: "PATCH",
@@ -43,16 +43,38 @@ updateNote = (state, id) => {
       )
     })
   }
-  
+
 clickRender = (val) => {
   this.setState({renderNote: val})
 }
+
+handleNewClick = () => {
+  fetch('http://localhost:3000/api/v1/notes', {
+    method: 'POST',
+    body: JSON.stringify({
+      user_id: 1,
+      title: "Add A Title Here",
+      body: "Write Notes Here"
+    }),
+    headers: {
+      "Content-type": "application/json"
+    }
+  })
+  .then(resp => resp.json())
+  .then(data => {
+    this.setState(prevState => ({
+      notes: prevState.notes.push(data)
+    }))
+  })
+}
+
   render() {
+    console.log(this.state.renderNote)
     return (
       <Fragment>
         <Search />
         <div className='container'>
-          <Sidebar notes={this.state.notes} click={() => this.clickRender}/>
+          <Sidebar notes={this.state.notes} click={() => this.clickRender} handleNewClick={this.handleNewClick}/>
           <Content note={this.state.renderNote} save={this.updateNote} />
         </div>
       </Fragment>

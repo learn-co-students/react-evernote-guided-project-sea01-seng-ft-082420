@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 
 const NoteViewer = (props) => {
-  console.log(props)
+  console.log(props.note)
   return (
     <Fragment>
       <h2>{props.note.note.title}</h2>
