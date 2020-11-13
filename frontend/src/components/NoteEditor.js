@@ -1,20 +1,5 @@
 import React, { Component } from 'react';
 
-// class NoteEditor extends Component {
-//   render() {
-//     return (
-//       <form className="note-editor">
-//         <input type="text" name="title" />
-//         <textarea name="body" />
-//         <div className="button-row">
-//           <input className="button" type="submit" value="Save" />
-//           <button type="button">Cancel</button>
-//         </div>
-//       </form>
-//     );
-//   }
-// }
-
 class NoteEditor extends Component {
   constructor(props) {
     super(props);
@@ -56,7 +41,7 @@ class NoteEditor extends Component {
         />
         <div className="button-row">
           <input className="button" type="submit" value="Save" />
-          <button type="button" onClick={this.props.onCancel}>Cancel</button>
+          <button className="button" type="reset" onClick={this.props.onCancel}>Cancel</button>
         </div>
       </form>
     );
@@ -70,6 +55,5 @@ NoteEditor.defaultProps = {
     body: "",
   }
 }
-
 
 export default NoteEditor;

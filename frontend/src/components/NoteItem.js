@@ -11,7 +11,6 @@ const NoteItem = (props) => {
       <li onClick={() => props.handleSelect(props.note)}>
         <h2>{props.note.title}</h2>
         <p>{body}</p>
-        {/* <button type="button">Edit</button> */}
       </li>)
   }
 
