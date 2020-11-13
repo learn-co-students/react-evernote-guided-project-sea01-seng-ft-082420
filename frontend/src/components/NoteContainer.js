@@ -47,8 +47,8 @@ handleNewClick = () => {
     method: 'POST',
     body: JSON.stringify({
       user_id: 1,
-      title: "Add A Title Here",
-      body: "Write Notes Here"
+      title: "Add Title Here",
+      body: "Write Thoughts Here"
     }),
     headers: {
       "Content-type": "application/json"
