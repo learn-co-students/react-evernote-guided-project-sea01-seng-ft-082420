@@ -12,7 +12,6 @@ const NoteItem = ({note, click}) => {
     element="span"
     truncateText="..." 
     text={note.body}
-    // textTruncateChild={<button onClick={() => props.onClick(props)}>Read More</button>}
     />
     
    <button onClick={() => click(note)}>Read More</button>

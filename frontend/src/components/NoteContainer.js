@@ -22,8 +22,6 @@ componentDidMount() {
 }
 
 updateNote = (state, id) => {
-  // console.log("hit the update");
-  // console.log(state, id)
   fetch(`http://localhost:3000/api/v1/notes/${id}`, {
     method: 'PATCH',
     headers: {
@@ -39,10 +37,10 @@ updateNote = (state, id) => {
     .then(data => {
       this.setState(prevState => ({
         notes: prevState.notes.map(note => note.id===id? data : note)
-        })
-      )
+      }))
+      this.clickRender(data)
     })
-  }
+}
 
 handleNewClick = () => {
   fetch('http://localhost:3000/api/v1/notes', {
@@ -78,7 +76,7 @@ handleDelete = (note) => {
     this.toggleViewer()
   })
   this.setState(prevState => ({
-    notes: prevState.notes.filter(notes => notes != note)}))
+    notes: prevState.notes.filter(notes => notes !== note)}))
 }
 
 clickRender = (val) => {
@@ -98,24 +96,21 @@ search = (search) => {
 }
 
   render() {
-    // console.log(this.state.renderNote)
-    // console.log(this.state.search)
     return (
       <Fragment>
         <Search search={this.search} />
         <div className='container'>
           <Sidebar 
-            notes={this.state.notes} 
-            click={() => this.clickRender} 
+            notes={this.state.notes}
+            search={this.state.search} 
+            click={this.clickRender} 
             handleNewClick={this.handleNewClick}
-            search={this.state.search}
           />
           <Content 
             note={this.state.renderNote}
-            click={this.clickRender} 
-            save={this.updateNote}  
             view={this.state.renderViewer}
             toggle={this.state.toggleEditor}
+            save={this.updateNote}  
             toggleEditor={this.toggleEditor}
             handleDelete={this.handleDelete}
           />

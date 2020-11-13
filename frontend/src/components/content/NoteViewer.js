@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 
 const NoteViewer = ({note, handleClick, handleDelete}) => {
-  console.log(note)
+
   return (
     <Fragment>
       <h2>{note.title}</h2>
