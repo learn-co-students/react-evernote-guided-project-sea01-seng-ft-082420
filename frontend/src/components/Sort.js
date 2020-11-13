@@ -20,14 +20,6 @@ const Sort = (props) => {
         <input type="radio" value='Shortest-Longest' name="sort" checked={props.sort === 'Shortest-Longest'} onChange={(e) => props.updateSort(e.target.value)}/>
         Shortest-Longest
       </label>
-      {/* <label>
-        <input type="radio" value='Newest-Oldest' name="sort" checked={props.sort === 'Newest-Oldest'} onChange={(e) => props.updateSort(e.target.value)}/>
-        Newest-Oldest
-      </label>
-      <label>
-        <input type="radio" value='Oldest-Newest' name="sort" checked={props.sort === 'Oldest-Newest'} onChange={(e) => props.updateSort(e.target.value)}/>
-        Oldest-Newest
-      </label> */}
     </div>
   );
 }

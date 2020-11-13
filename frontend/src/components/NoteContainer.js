@@ -29,10 +29,6 @@ class NoteContainer extends Component {
     })
   }
 
-  //filters notes based on what is typed in the search bar
-  // filterNotes = () => {
-  //   return this.state.notes.filter( note => note.title.toLowerCase().includes(this.state.searchInput.toLowerCase()) )
-  // }
 
   //updates the sort based on the sort pressed
   updateSort = (sortBy) => {
@@ -49,23 +45,13 @@ class NoteContainer extends Component {
       return filteredNotes     
     }
     if (this.state.sort === "A-Z") {
-        console.log('sort by A-Z')
         return filteredNotes.sort((a,b) => a.title.toLowerCase() > b.title.toLowerCase() ? 1 : -1)
     } else if (this.state.sort === "Z-A") {
-        console.log('sort by Z-A')
         return filteredNotes.sort((a,b) => a.title.toLowerCase() < b.title.toLowerCase() ? 1 : -1)
     } else if (this.state.sort === "Longest-Shortest") {
-      console.log('sort by Longest-Shortest')
       return filteredNotes.sort((a,b) => a.body.length < b.body.length ? 1 : -1)
     } else if (this.state.sort === "Shortest-Longest") {
-      console.log('sort by Shortest-Longest')
       return filteredNotes.sort((a,b) => a.body.length > b.body.length ? 1 : -1)
-    // } else if (this.state.sort === "Newest-Oldest") {
-    //   console.log('sort by Newest-Oldest')
-    //   return filteredNotes.sort((a,b) => a.updated_at < b.updated_at ? 1 : -1)
-    // } else if (this.state.sort === "Oldest-Newest") {
-    //   console.log('sort by Oldest-Newest')
-    //   return filteredNotes.sort((a,b) => a.updated_at > b.updated_at ? 1 : -1)
     } else {
         return filteredNotes
     }
@@ -103,39 +89,30 @@ class NoteContainer extends Component {
     })
   }
 
-  //updates the change of a note in whole notes array when new note created. called in noteEditor
+  //updates the change of a note in whole notes array when new note updated. called in noteEditor
   updateNotes = (updatedNote) => {
     let updatedNotes = this.state.notes.map( note => note.id === updatedNote.id ? updatedNote : note)
     this.setState({
       notes: updatedNotes,
       editClicked: false,
+      //makes it go back to direction screen
       selectedNote: {}
     })
   }
 
   handleEditClick = () => {
-    console.log('edit button has been clicked')
     this.setState({
       editClicked: true
     })
   }
-
-  // handleSaveClick = () => {
-  //   console.log('save button has been clicked')
-  //   this.setState({
-  //     editClicked: false
-  //   })
-  // }
   
   handleCancelClick = () => {
-    console.log('cancel button has been clicked')
     this.setState({
       editClicked: false
     })
   }
 
   handleDeleteClick = () => {
-    console.log('delete button has been clicked')
     fetch(`http://localhost:3000/api/v1/notes/${this.state.selectedNote.id}`, {
       method: "DELETE"
     })
@@ -156,7 +133,6 @@ class NoteContainer extends Component {
 
   render() {
     //console.log(`handleClicked = ${this.state.editClicked}`)
-    console.log(this.state.notes)
     return (
       <Fragment>
         <Search handleSearch={this.handleSearch}/>

@@ -32,15 +32,8 @@ class NoteEditor extends Component {
     }))
   }
 
-  // editNote = e => {
-  //   this.setState({
-  //     [e.target.name]: e.target.value
-  //   });
-  // };
-
   handleSubmit = (e) => {
     e.preventDefault()
-    console.log('save button has been clicked')
     return fetch(`http://localhost:3000/api/v1/notes/${this.props.selectedNote.id}`, {
       method: 'PATCH',
       headers: {
@@ -51,7 +44,6 @@ class NoteEditor extends Component {
     })
     .then(res => res.json())
     .then(updatedNote => {
-      console.log(updatedNote)
       this.props.updateNotes(updatedNote)
     })
   }
