@@ -52,11 +52,11 @@ class NoteContainer extends Component {
           user_id: USER_ID,
         })
       })
-        .then(res => res.json())
-        .then(n => {
-          this.setState({selectedNote: n, edit: false});
-          this.getNotes();
-          });
+      .then(res => res.json())
+      .then(n => {
+        this.setState({selectedNote: n, edit: false});
+        this.getNotes();
+      });
     }
   }
 
@@ -71,21 +71,21 @@ class NoteContainer extends Component {
       fetch(postNote, {
         method: 'POST',
         headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
         },
         body: JSON.stringify({
-          title: "title",
+          title: "title", placeholder:"Click to display a note.", color:"transparent",
           body: "write your note here",
           user_id: USER_ID,
         })
       })
-        .then(res => res.json())
-        .then(note => {
-          const notes = [...this.state.notes, note];
-          this.setState({ notes: notes, selectedNote: note, edit: false })
-        });
-    }
+      .then(res => res.json())
+      .then(note => {
+        const notes = [...this.state.notes, note];
+        this.setState({ notes: notes, selectedNote: note, edit: false })
+      });
+  }
 
   handleSearch = (event) => {
     this.setState({
