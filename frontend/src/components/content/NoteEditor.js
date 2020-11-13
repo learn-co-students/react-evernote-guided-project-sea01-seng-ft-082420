@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class NoteEditor extends Component {
   
   constructor(props){
-    console.log(props)
+    // console.log(props)
     super(props)
     this.state = {
       input: [ ]
@@ -24,14 +24,14 @@ class NoteEditor extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-    this.props.save(this.state, this.props.input.id),
-    this.props.toggle(),
+    this.props.save(this.state, this.props.input.id)
+    this.props.toggle()
     this.props.click(this.state)
   }
 
   render() {
-    console.log(this.props.input)
-    console.log(this.state)
+    // console.log(this.props.input)
+    // console.log(this.state)
     
     return (
       <form className="note-editor" onSubmit={this.handleSubmit} >

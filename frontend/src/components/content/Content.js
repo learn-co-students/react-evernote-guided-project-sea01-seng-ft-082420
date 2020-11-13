@@ -21,9 +21,9 @@ class Content extends Component {
   }
 
   handleClick = (val) => {
-    this.setState({input: val, renderEditor: true}),
+    this.setState({input: val, renderEditor: true})
     this.props.toggleEditor()
-    console.log(val)
+    // console.log(val)
   }
 
   toggleEditor = () => {
@@ -51,10 +51,10 @@ class Content extends Component {
     }
 
   render() {
-    console.log(this.state.input)
-    console.log(this.state.renderEditor)
-    console.log(this.props.view)
-    console.log(this.props.toggle)
+    // console.log(this.state.input)
+    // console.log(this.state.renderEditor)
+    // console.log(this.props.view)
+    // console.log(this.props.toggle)
     return (
       <div className='master-detail-element detail'>
         {this.renderContent()}

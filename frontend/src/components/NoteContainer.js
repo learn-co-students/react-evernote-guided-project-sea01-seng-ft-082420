@@ -10,7 +10,8 @@ class NoteContainer extends Component {constructor() {
     notes: [ ],
     renderNote: [],
     renderViewer: false,
-    toggleEditor: true
+    toggleEditor: true,
+    search: ''
   }
 }
 
@@ -71,16 +72,22 @@ toggleEditor = () => {
   this.setState({toggleEditor: true})
 }
 
+search = (search) => {
+  this.setState({search})
+}
+
   render() {
-    console.log(this.state.renderNote)
+    // console.log(this.state.renderNote)
+    console.log(this.state.search)
     return (
       <Fragment>
-        <Search />
+        <Search search={this.search} />
         <div className='container'>
           <Sidebar 
             notes={this.state.notes} 
             click={() => this.clickRender} 
             handleNewClick={this.handleNewClick}
+            search={this.state.search}
           />
           <Content 
             note={this.state.renderNote}
