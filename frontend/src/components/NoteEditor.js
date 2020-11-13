@@ -57,3 +57,14 @@ NoteEditor.defaultProps = {
 }
 
 export default NoteEditor;
+
+
+
+
+
+
+
+
+
+
+// credit to https://github.com/hysan for the guide I followed for this particular section //
