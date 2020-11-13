@@ -7,7 +7,7 @@ class NoteContainer extends Component {constructor() {
   super();
 
   this.state = {
-    notes: [ ],
+    notes: [],
     renderNote: [],
     renderViewer: false,
     toggleEditor: true,
@@ -25,7 +25,7 @@ updateNote = (state, id) => {
   // console.log("hit the update");
   // console.log(state, id)
   fetch(`http://localhost:3000/api/v1/notes/${id}`, {
-    method: "PATCH",
+    method: 'PATCH',
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json"
@@ -64,6 +64,23 @@ handleNewClick = () => {
   })
 }
 
+handleDelete = (note) => {
+  fetch(`http://localhost:3000/api/v1/notes/${note.id}`, {
+    method: 'DELETE',
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json"
+    }
+  })
+  .then(resp => resp.json())
+  .then(resp => {
+    console.log(resp)
+    this.toggleViewer()
+  })
+  this.setState(prevState => ({
+    notes: prevState.notes.filter(notes => notes != note)}))
+}
+
 clickRender = (val) => {
   this.setState({renderNote: val, renderViewer: true, toggleEditor: false})
 }
@@ -72,13 +89,17 @@ toggleEditor = () => {
   this.setState({toggleEditor: true})
 }
 
+toggleViewer = () => {
+  this.setState({renderViewer: false})
+}
+
 search = (search) => {
   this.setState({search})
 }
 
   render() {
     // console.log(this.state.renderNote)
-    console.log(this.state.search)
+    // console.log(this.state.search)
     return (
       <Fragment>
         <Search search={this.search} />
@@ -96,6 +117,7 @@ search = (search) => {
             view={this.state.renderViewer}
             toggle={this.state.toggleEditor}
             toggleEditor={this.toggleEditor}
+            handleDelete={this.handleDelete}
           />
         </div>
       </Fragment>

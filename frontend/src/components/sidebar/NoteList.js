@@ -2,11 +2,11 @@ import React from 'react';
 import NoteItem from './NoteItem';
 
 const NoteList = ({notes, click, search}) => {
-  // console.log(props.notes)
-  console.log(search)
+  console.log(notes)
+  // console.log(search)
 
   const filteredNotes = notes.filter(text => text.title.toUpperCase().includes(search.toUpperCase()))
-  console.log(filteredNotes)
+  
   return (
     <ul>
       {/* Render list of notes here... */}

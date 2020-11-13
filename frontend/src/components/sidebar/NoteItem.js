@@ -18,8 +18,6 @@ const NoteItem = ({note, click}) => {
    <button onClick={() => click(note)}>Read More</button>
   </li>
 
-
-);
-  }
+  );
+}
 export default NoteItem;
-// key={note.id}

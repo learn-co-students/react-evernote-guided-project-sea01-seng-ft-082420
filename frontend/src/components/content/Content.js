@@ -44,7 +44,7 @@ class Content extends Component {
       if (this.props.toggle && this.state.renderEditor) {
         return <NoteEditor input={this.state.input} click={this.props.click} save={this.props.save} toggle={this.toggleEditor}/>;
       } else if (this.props.view) {
-        return <NoteViewer note={this.props.note} handleClick={this.handleClick}/>;
+        return <NoteViewer note={this.props.note} handleClick={this.handleClick} handleDelete={this.props.handleDelete} />;
       } else {
         return <Instructions />;
       }
@@ -52,9 +52,9 @@ class Content extends Component {
 
   render() {
     // console.log(this.state.input)
-    // console.log(this.state.renderEditor)
-    // console.log(this.props.view)
-    // console.log(this.props.toggle)
+    console.log(this.props.toggle)
+    console.log(this.state.renderEditor)
+    console.log(this.props.view)
     return (
       <div className='master-detail-element detail'>
         {this.renderContent()}
