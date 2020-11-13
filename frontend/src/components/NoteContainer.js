@@ -59,7 +59,7 @@ handleNewClick = () => {
   .then(resp => resp.json())
   .then(data => {
     this.setState(prevState => ({
-      notes: prevState.notes.push(data)
+      notes: prevState.notes.concat(data)
     }))
   })
 }
