@@ -48,7 +48,7 @@ class Sidebar extends Component {
     return (
       <div className='master-detail-element sidebar'>
         <DropdownButton id="dropdown-basic-button" title="Sort By">
-          <Dropdown.Item onSelect={(evt) => this.sortByTitle()}>Title</Dropdown.Item>
+          <Dropdown.Item onSelect={() => this.sortByTitle()}>Title</Dropdown.Item>
           <Dropdown.Item onClick={() => this.sortByNoteSize()}>Length</Dropdown.Item>
           {/* <Dropdown.Item onClick={() => this.sortByDateEdited()}>Date Edited</Dropdown.Item> */}
         </DropdownButton>
