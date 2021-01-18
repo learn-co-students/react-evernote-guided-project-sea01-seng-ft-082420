@@ -1,4 +1,4 @@
-README: React Evernote
+README: React Note Taker
 ======================
 
 Task Lister is making its return in React! However, this time we'll be kicking it up a notch and using that same backend to drive an Evernote-like frontend built in React.
