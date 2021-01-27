@@ -1,41 +1,57 @@
-README: React Evernote
+# Thoughts for the day...
+#### By Jonelle Noelani Yacapin, 21 Dec 2020
+#### An application for creating personal notes with titles.
 ======================
 
-Task Lister is making its return in React! However, this time we'll be kicking it up a notch and using that same backend to drive an Evernote-like frontend built in React.
+## Technologies Used
+* Ruby 2.6.1
+* Rails 5.0.2
+* React 17.0.1
 
-Your goal will be to complete the baseline deliverables using the provided starter code and then make this project your own by building out unique stretch goals. Some suggestions are listed below, but try to be creative!
+## Description
+A truncated view of each note is visible in a scrollable sidebar.  Select a note by clicking 'Read More' to display the full note with buttons to 'Edit' or 'Delete' the note.  
 
-## Requirements
+![result](react-evernote-display.gif)
 
-- [ ] Complete all of the *Deliverables*.
-- [ ] Build out at least 1 stretch goal feature.
+Can edit the title or body of text and save it.  Selecting 'Cancel' or another note will discard any changes made.
+
+![result](react-evernote-edit.gif)
+
+New notes can be created and automatically added to sidebar.  Then, they can be edited from the default placeholder text and title.  
+
+![result](react-evernote-create.gif)
+
+Use search bar to search through note titles.
+
+![result](react-evernote-filter.gif)
 
 ## Setup
+* Fork and clone this repository.
 
-The codebase is split up into a Rails API backend and a React frontend. Everything is contained in this single repository. Your Rails code is located inside of the `backend` folder and your React code is located inside of the `frontend` folder.
+The codebase is split up into a Rails API backend and a React frontend. Everything is contained in this single repository. The Rails code is located inside of the `backend` folder and the React code is located inside of the `frontend` folder.
 
 Each of those folders has a README file with setup instructions. For conciseness, those instructions are copy pasted here:
-
-### Frontend
-
-```sh
-# from within this directory:
-npm install
-PORT=4000 npm start
-```
-
-This React app will be running on `http://localhost:4000`.
 
 ### Backend
 
 ```sh
-# from within this directory:
+cd backend
 bundle install
 rails db:create db:migrate db:seed
 rails s
 ```
 
-Your Rails backend API will be running on `http://localhost:3000`.
+Rails backend API will be running on `http://localhost:3000`.
+
+### Frontend
+
+```sh
+cd frontend
+npm install
+PORT=4000 npm start
+```
+
+This React app will be running on `http://localhost:4000`.
 
 #### User ID
 
@@ -50,71 +66,16 @@ The seed file should create one user for you, so your default `USER_ID` should b
 | POST   | `/api/v1/notes`     | `'Content-Type': 'application/json'`<br/>`'Accept': 'application/json'` | title, body, user_id |
 | PATCH  | `/api/v1/notes/:id` | `'Content-Type': 'application/json'`<br/>`'Accept': 'application/json'` | title, body, user_id |
 
-**Tips:**
+## Known Bugs
+* Need to get Emoji Editor fully integrated.
 
-* Test out your routes with [Postman](https://www.getpostman.com/) to see how they work and what they return.
-* Look at the source code! There are many more routes that are not listed that may make your life easier. Use those development skills and hack the code!
+## License
+This software is licensed under the [MIT](https://choosealicense.com/licenses/mit/) license.
 
-## Provided Code
+Copyright (c) 2020 Jonelle Noelani Yacapin
 
-**Backend**
+## Contact Information
+Jonelle Noelani Yacapin fromwinetocode@gmail.com
 
-* The entire backend API is complete for the baseline deliverables.
-* You should not have to modify this code unless you want to add stretch features that are not currently supported by this API.
-
-**Frontend**
-
-* All CSS styles are provided for you.
-* Many components are provided for you, but most are not completely functional. It is your job to read the code and figure out how to incorporate it into your app.
-
-## Deliverables
-
-Look at the gif below to see how the app should look and behave. These are the baseline deliverables you need to complete:
-
-**Viewing and Displaying Notes**
-
-- [ ] Display all notes in the left sidebar.
-- [ ] Displayed sidebar notes should show the title and a truncated body.
-- [ ] When clicking a note from the sidebar, display its contents in the right panel.
-
-![result](react-evernote-display.gif)
-
-**Editing Notes**
-
-- [ ] When displaying a note in the right panel, show an `Edit` button.
-- [ ] Clicking the `Edit` button will allow the user to edit the title and body in the right panel.
-- [ ] When in edit mode, also show a `Save` button which saves the note via a `PATCH` request.
-- [ ] When in edit mode, also show a `Cancel` button which discards any changes and reverts back to displaying the note.
-- [ ] Clicking a different note while in edit mode should discard your changes and display the new note instead.
-
-![result](react-evernote-edit.gif)
-
-**Creating Notes**
-
-- [ ] At the bottom of your left sidebar, show a `New` button.
-- [ ] Clicking `New` will create a new note via a `POST` request with some default title and body.
-- [ ] This new note should appear in the sidebar.
-
-![result](react-evernote-create.gif)
-
-**Filtering Notes**
-
-- [ ] Implement the filter to search through your notes list by title.
-
-![result](react-evernote-filter.gif)
-
-## Stretch Goals
-
-When you are finished with the *Delieverables*, you can build out any new features that you want. This is your chance to be creative and make your project unique!
-
-Some suggestions:
-
-- Add the ability to filter by body, date created, date edited, etc.
-- Sorting by date created, date edited, alphabetical, etc.
-- Use `react-router` to create a multi-page app
-- User signup & login
-- Sharing notes with other users
-- Rich text formatting
-- Tagging
-- Emailing notes
-
+## Project Status
+A work in progress with plans to work on issues listed under ‘Known Bugs’.
