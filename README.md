@@ -11,19 +11,19 @@
 ## Description
 A truncated view of each note is visible in a scrollable sidebar.  Select a note by clicking 'Read More' to display the full note with buttons to 'Edit' or 'Delete' the note.  
 
-![result](react-evernote-display.gif)
+![result](thoughts_view.png)
 
 Can edit the title or body of text and save it.  Selecting 'Cancel' or another note will discard any changes made.
 
-![result](react-evernote-edit.gif)
+![result](thoughts_edit.png)
 
 New notes can be created and automatically added to sidebar.  Then, they can be edited from the default placeholder text and title.  
 
-![result](react-evernote-create.gif)
+![result](thoughts_new.png)
 
 Use search bar to search through note titles.
 
-![result](react-evernote-filter.gif)
+![result](thoughts_search.png)
 
 ## Setup
 * Fork and clone this repository.
