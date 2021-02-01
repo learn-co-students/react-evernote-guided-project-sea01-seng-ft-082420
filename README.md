@@ -3,7 +3,12 @@ README: React Note Taker
 
 Note Taker is a single page application for note taking, organizing, and task management with a rails backend and a react frontend. 
 
-Youtube video demo: https://youtu.be/8eTHO_oZoJU
+#### [Video walkthrough of the app](https://youtu.be/8eTHO_oZoJU)
+
+## Build with
+
+- React.js
+- Rails API
 
 ### Frontend
 
@@ -55,5 +60,5 @@ Your Rails backend API will be running on `http://localhost:3000`.
 
 ![result](react-evernote-filter.gif)
 
-
-
+### Contributors
+Chandler Hanson
