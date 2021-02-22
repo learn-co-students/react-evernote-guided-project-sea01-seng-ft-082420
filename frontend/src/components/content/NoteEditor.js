@@ -40,6 +40,7 @@ class NoteEditor extends Component {
           placeholder={this.props.input.title} 
           onChange={this.handleChange} 
         />
+        
         <textarea 
           name="body" 
           placeholder={this.props.input.body} 
