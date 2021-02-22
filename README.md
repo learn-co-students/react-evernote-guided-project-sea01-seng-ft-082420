@@ -11,7 +11,7 @@
 ## Description
 A truncated view of each note is visible in a scrollable sidebar.  Select a note by clicking 'Read More' to display the full note with buttons to 'Edit' or 'Delete' the note.  
 
-![result](thoughts_view.png)
+[![Thoughts of the day View](thoughts_view.png)](https://youtu.be/wmOsB5008BI)
 
 Can edit the title or body of text and save it.  Selecting 'Cancel' or another note will discard any changes made.
 
